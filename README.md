@@ -1,7 +1,6 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sandra is a Rails 5 ecommerce API to store and sell books. I make this just for fun. Please enjoy.
 
 Things you may want to cover:
 
@@ -9,10 +8,13 @@ Things you may want to cover:
     * 2.3.1
 
 * System dependencies
+    * at first, install nokogiri and bundler `gem install nokogiri` / `gem install bundler`
+    * run `bundle install`
 
 * Configuration
 
 * Database creation
+    * start with sqlite3, just run `rails db:create`
 
 * Database initialization
 
