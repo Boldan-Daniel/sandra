@@ -14,7 +14,7 @@ Things you may want to cover:
 * Configuration
 
 * Database creation
-    * start with sqlite3, just run `rails db:create`
+    * We will use sqlite3
 
 * Database initialization
 
