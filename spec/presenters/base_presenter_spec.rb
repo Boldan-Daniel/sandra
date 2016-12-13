@@ -6,7 +6,7 @@ RSpec.describe BasePresenter do
 
   describe '#initialize' do
     it 'sets the "object" variable with "some_object"' do
-      expect(presenter.object).to eq 'fake'
+      expect(presenter.object).to eq 'some_object'
     end
 
     it 'sets the "params" variable with { some_params: "something" }' do
