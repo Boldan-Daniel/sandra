@@ -13,6 +13,9 @@ Things you may want to cover:
 
 * Configuration
     * when install rails app type `rails new sandra --api --skip-test-unit`
+    * after install carrierwave, run in terminal `rails g uploader Cover`
+    * add column to books table with `rails g migration add_cover_to_books cover:string`
+    * don't forget to run `rails db:migrate && rails db:migrate RAILS_ENV=test`
 
 * Database creation
     * We will use sqlite3
