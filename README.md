@@ -10,6 +10,7 @@ Things you may want to cover:
 * System dependencies
     * at first, install nokogiri, bundler and rails `gem install nokogiri` / `gem install bundler` / `gem install rails`
     * run `bundle install`
+    * after `rails db:migrate && rails db:migrate RAILS_ENV=test` run `rails db:seed`
 
 * Configuration
     * when install rails app type `rails new sandra --api --skip-test-unit`
