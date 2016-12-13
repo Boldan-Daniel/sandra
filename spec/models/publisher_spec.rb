@@ -6,4 +6,7 @@ RSpec.describe Publisher, type: :model do
   end
 
   it { should validate_presence_of(:name) }
+
+  # association specs
+  it { should have_many(:books) }
 end

@@ -7,4 +7,8 @@ RSpec.describe Author, type: :model do
 
   it { should validate_presence_of(:given_name) }
   it { should validate_presence_of(:family_name) }
+
+  # associations specs
+  it { should have_many(:books) }
+
 end
