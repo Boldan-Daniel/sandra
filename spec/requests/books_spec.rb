@@ -8,8 +8,6 @@ RSpec.describe 'Books', type: :request do
 
   let(:books) { [agile_rails, practical_ruby, ecommerce_rails] }
 
-  let(:json_body) { JSON.parse(response.body) }
-
   describe 'GET /api/books' do
     before { books }
 
