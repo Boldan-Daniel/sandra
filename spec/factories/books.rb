@@ -21,7 +21,7 @@ FactoryGirl.define do
     association :author, factory: :topher_cyll
   end
 
-  factory :eccomerce_rails, class: Book do
+  factory :ecommerce_rails, class: Book do
     title 'Beginning Ruby on Rails E-Commerce'
     subtitle 'Online shops using Ruby on Rails'
     isbn_10 '5774367891'
