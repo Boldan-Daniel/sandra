@@ -4,13 +4,13 @@ FactoryGirl.define do
     family_name "Doe"
   end
 
-  factory :dave_thomas, class: Author do
-    given_name 'Dave'
-    family_name 'Thomas'
+  factory :jarkko_laine, class: Author do
+    given_name 'Jarkko'
+    family_name 'Laine'
   end
 
-  factory :michael_hartl, class: Author do
-    given_name 'Michael'
-    family_name 'Hartl'
+  factory :topher_cyll, class: Author do
+    given_name 'Topher'
+    family_name 'Cyll'
   end
 end
