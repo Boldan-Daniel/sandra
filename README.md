@@ -8,10 +8,11 @@ Things you may want to cover:
     * 2.3.1
 
 * System dependencies
-    * at first, install nokogiri and bundler `gem install nokogiri` / `gem install bundler`
+    * at first, install nokogiri, bundler and rails `gem install nokogiri` / `gem install bundler` / `gem install rails`
     * run `bundle install`
 
 * Configuration
+    * when install rails app type `rails new sandra --api --skip-test-unit`
 
 * Database creation
     * We will use sqlite3
@@ -19,6 +20,7 @@ Things you may want to cover:
 * Database initialization
 
 * How to run the test suite
+    * after you configured rspec with dependency type `rspec` in your root folder
 
 * Services (job queues, cache servers, search engines, etc.)
 
