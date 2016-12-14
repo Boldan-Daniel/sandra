@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'FieldPicker' do
   let(:agile_rails) { create(:agile_rails) }
   let(:params) { { fields: 'id,title,subtitle' } }
-  let(:presenter) { BookPresenter.new(rails_tutorial, params) }
+  let(:presenter) { BookPresenter.new(agile_rails, params) }
   let(:field_picker) { FieldPicker.new(presenter) }
 
   before do
