@@ -26,3 +26,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]  # Bundle the
 
 gem 'carrierwave', '~> 0.11.2'                  # Upload files in your Ruby applications, map them to a range of ORMs
 gem 'carrierwave-base64', '~> 2.3', '>= 2.3.4'  # Upload files to your API from mobile devises
+gem 'kaminari', '~> 0.17.0'                     # Scope & Engine based paginator for Rails
