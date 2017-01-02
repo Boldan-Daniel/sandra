@@ -23,7 +23,7 @@ class Paginator
   def validate_param!(name, default)
     return default unless @query_params[name]
 
-    unless (@query_params[name] =~ /\A\d+\z/)
+    unless (@query_params[name].to_s =~ /\A\d+\z/)
       raise QueryBuilderError.new("#{name}=#{@query_params[name]}"),
             'Invalid Pagination params. Only numbers are supported  for "page" and "per"'
     end
