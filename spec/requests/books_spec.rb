@@ -96,5 +96,31 @@ RSpec.describe 'Books', type: :request do
         end
       end
     end
+
+    describe 'sorting' do
+      context 'with valid column name "id"' do
+        it 'sorts the books by "id desc"' do
+          get '/api/books?sort=id&dir=desc'
+          expect(json_body['data'].first['id']).to eq ecommerce_rails.id
+          expect(json_body['data'].last['id']).to eq agile_rails.id
+        end
+      end
+
+      context 'with invalid column name "fid"' do
+        before { get '/api/books?sort=fid&dir=asc' }
+
+        it 'receives HTTP status 400' do
+          expect(response.status).to eq 400
+        end
+
+        it 'receives an error' do
+          expect(json_body['error']).to_not be_nil
+        end
+
+        it 'receives "sort=fid" as an invalid param' do
+          expect(json_body['error']['invalid_params']).to eq 'sort=fid'
+        end
+      end
+    end
   end
 end
