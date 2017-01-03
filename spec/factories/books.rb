@@ -16,7 +16,7 @@ FactoryGirl.define do
     isbn_10 '5564126688'
     isbn_13 '9776887654415'
     description 'Learn advanced programming techniques'
-    released_on '2008-10-15'
+    released_on '2016-10-15'
     publisher_id  nil
     association :author, factory: :topher_cyll
   end
@@ -27,7 +27,7 @@ FactoryGirl.define do
     isbn_10 '5774367891'
     isbn_13 '9654378654761'
     description 'Develop next-generation online shops using Ruby on Rails'
-    released_on '2008-10-15'
+    released_on '2016-11-25'
     publisher
     association :author, factory: :jarkko_laine
   end
