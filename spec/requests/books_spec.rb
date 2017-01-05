@@ -122,5 +122,32 @@ RSpec.describe 'Books', type: :request do
         end
       end
     end
+
+    describe 'filtering' do
+      context 'with valid filtering param "q[title_cont]=Tutorial"' do
+        it 'receives "Ruby on Rails Tutorial" back' do
+          get('/api/books?q[title_cont]=Tutorial')
+
+          expect(json_body['data'].first['id']).to eq agile_rails.id
+          expect(json_body['data'].size).to eq 1
+        end
+      end
+
+      context 'with invalid filtering param "q[fake_title_cont]=Rails"' do
+        before { get('/api/books?q[fake_title_cont]=Rails') }
+
+        it 'gets "400 Bad Request" back' do
+          expect(response.status).to eq 400
+        end
+
+        it 'receives an error' do
+          expect(json_body['error']).to_not be_nil
+        end
+
+        it 'receives "q[fake_title_cont]=Rails" as an invalid param' do
+          expect(json_body['error']['invalid_params']).to eq 'q[fake_title_cont]=Rails'
+        end
+      end
+    end
   end
 end
