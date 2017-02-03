@@ -13,6 +13,10 @@ class ApplicationController < ActionController::API
     }
   end
 
+  def filter(scope)
+    Filter.new(scope, params).filter
+  end
+
   def sort(scope)
     Sorter.new(scope, params).sort
   end

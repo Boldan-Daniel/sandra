@@ -40,7 +40,7 @@ class Filter
   def error!(key, data)
     columns = @presenter.filter_attributes.join(',')
     predicates = PREDICATES.join(',')
-    raise QueryBuilderError.new("q[#{key}]=data[#{data[:value]}]"),
+    raise QueryBuilderError.new("q[#{key}]=#{data[:value]}"),
         "Invalid Filter params. Allowed columns: #{columns}. Predicates: #{predicates} "
   end
 
