@@ -17,7 +17,7 @@ Book.create!(title: 'Practical Ruby Projects',
              isbn_10: '5564126688',
              isbn_13: '9776887654415',
              description: 'Learn advanced programming techniques',
-             released_on: '2008-10-15',
+             released_on: '2016-11-15',
              publisher: nil,
              author: cyll)
 
@@ -26,6 +26,6 @@ Book.create!(title: 'Beginning Ruby on Rails E-Commerce',
              isbn_10: '5774367891',
              isbn_13: '9654378654761',
              description: 'Develop next-generation online shops using Ruby on Rails',
-             released_on: '2008-10-15',
+             released_on: '2016-10-15',
              publisher: packtpub,
              author: laine)
