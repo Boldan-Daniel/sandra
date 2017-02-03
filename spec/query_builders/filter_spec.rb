@@ -89,5 +89,23 @@ RSpec.describe Filter do
         end
       end
     end
+
+    context 'with invalid parameters' do
+      context 'with invalid column name "fid"' do
+        let(:params) { { 'q' => { 'fid_gt' => '2' } } }
+
+        it 'raises a "QueryBuilderError" exception' do
+          expect { filtered }.to raise_error(QueryBuilderError)
+        end
+      end
+
+      context 'with invalid predicate "gtz"' do
+        let(:params) { { 'q' => { 'id_gtx' => '2' } } }
+
+        it 'raises a "QueryBuilderError" exception' do
+          expect { filtered }.to raise_error(QueryBuilderError)
+        end
+      end
+    end
   end
 end
