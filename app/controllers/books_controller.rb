@@ -3,4 +3,19 @@ class BooksController < ApplicationController
     books = orchestrate_query(Book.all)
     render serialize(books)
   end
+
+  def show
+    render serialize(book)
+  end
+
+  private
+
+  def book
+    @book ||= params[:id] ? Book.find_by!(id: params[:id]) : Book.new(book_params)
+  end
+  alias_method :resource, :book
+
+  def book_params
+
+  end
 end
