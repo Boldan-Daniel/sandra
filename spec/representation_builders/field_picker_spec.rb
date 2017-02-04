@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'FieldPicker' do
   let(:agile_rails) { create(:agile_rails) }
-  let(:params) { { fields: 'id,title,subtitle' } }
+  let(:params) { { fields: 'id,title' } }
   let(:presenter) { BookPresenter.new(agile_rails, params) }
   let(:field_picker) { FieldPicker.new(presenter) }
 
@@ -35,10 +35,18 @@ RSpec.describe 'FieldPicker' do
       let(:params) { {} }
 
       it 'updates "data" with the fields ("id", "title", "author_id")' do
-        expect(field_picker.send(:pick).data).to eq({
+        expect(field_picker.pick.data).to eq({
             'id' => agile_rails.id,
             'title' => 'Ruby on Rails Tutorial',
             'author_id' => agile_rails.author.id })
+      end
+    end
+
+    context 'with invalid attribute "fid"' do
+      let(:params) { { fields: 'fid,title' } }
+
+      it 'raises a "RepresentationBuilderError"' do
+        expect { field_picker.pick }.to raise_error(RepresentationBuilderError)
       end
     end
   end
