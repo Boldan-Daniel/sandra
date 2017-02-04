@@ -47,6 +47,22 @@ RSpec.describe 'Books', type: :request do
           end
         end
       end
+
+      context 'with invalid fields parameter "fields=fid,title"' do
+        before { get '/api/books?fields=fid,title'}
+
+        it 'get "400 Bad Request" back' do
+          expect(response.status).to eq 400
+        end
+
+        it 'receives an error' do
+          expect(json_body['error']).to_not be_nil
+        end
+
+        it 'receives "fields=fid" as an invalid param' do
+          expect(json_body['error']['invalid_params']).to eq 'fields=fid'
+        end
+      end
     end
 
     describe 'pagination' do
@@ -133,7 +149,7 @@ RSpec.describe 'Books', type: :request do
         end
       end
 
-      context 'with invalid filtering param"q[ftitle_cont]=Tutorial"' do
+      context 'with invalid filtering param "q[ftitle_cont]=Tutorial"' do
         before { get('/api/books?q[ftitle_cont]=Tutorial') }
 
         it 'get "400 Bad Request" back' do
