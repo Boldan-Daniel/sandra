@@ -8,6 +8,7 @@ group :development, :test do
   gem 'byebug', platform: :mri                  # Call 'byebug' to get a debugger console
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'       # A testing framework for Rails
   gem 'factory_girl_rails', '~> 4.7'            # Easier to work with factory_girl than fixtures
+  gem 'awesome_print', '~> 1.7'                 # pretty print Ruby objects
 end
 
 group :development do

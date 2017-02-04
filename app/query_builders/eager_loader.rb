@@ -12,7 +12,7 @@ class EagerLoader
     validate!('include', @include)
 
     (@embed + @include).each do |relation|
-      @scope = @scope.include(relation)
+      @scope = @scope.includes(relation)
     end
 
     @scope
@@ -20,7 +20,7 @@ class EagerLoader
 
   def validate!(name, params)
     params.each do |param|
-      unless @presenter.relations.include?(params)
+      unless @presenter.relations.include?(param)
         raise QueryBuilderError.new("#{name}=#{param}"),
               "Invalid #{name}. Allowed relations: #{@presenter.relations.join(',')}"
       end
