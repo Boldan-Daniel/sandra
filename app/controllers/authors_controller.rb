@@ -17,7 +17,7 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    if author.update_attributes(book_params)
+    if author.update_attributes(author_params)
       render serialize(author).merge(status: :ok)
     else
       unprocessable_entity! author
@@ -32,11 +32,11 @@ class AuthorsController < ApplicationController
   private
 
   def author
-    @author ||= params[:id] ? Author.find_by!(id: params[:id]) : Author.new(book_params)
+    @author ||= params[:id] ? Author.find_by!(id: params[:id]) : Author.new(author_params)
   end
   alias_method :resource, :author
 
-  def book_params
+  def author_params
     params.require(:data).permit(:given_name, :family_name)
   end
 end
