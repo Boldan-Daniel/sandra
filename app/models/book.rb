@@ -1,4 +1,7 @@
 class Book < ApplicationRecord
+  include PgSearch
+  multisearchable against: [:title, :subtitle, :description]
+
   mount_base64_uploader :cover, CoverUploader
 
   belongs_to :publisher, required: false
