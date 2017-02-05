@@ -1,7 +1,12 @@
 FactoryGirl.define do
   factory :author do
-    given_name "John"
-    family_name "Doe"
+    given_name 'John'
+    family_name 'Doe'
+  end
+
+  factory :sam_ruby, class: Author do
+    given_name 'Sam'
+    family_name 'Ruby'
   end
 
   factory :jarkko_laine, class: Author do
