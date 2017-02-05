@@ -266,4 +266,40 @@ RSpec.describe 'Books', type: :request do
     end
   end
 
+  describe 'PATCH /api/books/:id' do
+    before { patch "/api/books/#{agile_rails.id}", params: { data: params } }
+
+    context 'with valid parameters' do
+      let(:params) { { title: 'New agile rails title' } }
+
+      it 'gets HTTP status 200' do
+        expect(response.status).to eq 200
+      end
+
+      it 'receives the updated resource' do
+        expect(json_body['data']['title']).to eq('New agile rails title')
+      end
+
+      it 'updates the record in the database' do
+        expect(Book.first.title).to eq 'New agile rails title'
+      end
+    end
+
+    context 'with invalid parameters' do
+      let(:params) { { title: '' } }
+
+      it 'gets HTTP status 422' do
+        expect(response.status).to eq 422
+      end
+
+      it 'receives an error details' do
+        error = { 'title' => ["can't be blank"] }
+        expect(json_body['error']['invalid_params']).to eq(error)
+      end
+
+      it 'does not update the record in database' do
+        expect(Book.first.title).to eq('Ruby on Rails Tutorial')
+      end
+    end
+  end
 end
