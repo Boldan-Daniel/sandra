@@ -208,12 +208,62 @@ RSpec.describe 'Books', type: :request do
         expect(response.body).to eq expected.to_json
       end
     end
-  end
 
-  context 'with nonexistent resource' do
-    it 'gets HTTP status 404' do
-      get '/api/books/342323'
-      expect(response.status).to eq 404
+    context 'with nonexistent resource' do
+      it 'gets HTTP status 404' do
+        get '/api/books/342323'
+        expect(response.status).to eq 404
+      end
     end
   end
+
+  describe 'POST /api/books' do
+    let(:author) { create(:author) }
+
+    before { post '/api/books', params: { data: params } }
+
+    context 'with valid parameters' do
+      let(:params) { attributes_for(:agile_rails,
+                                    isbn_10: '1235548790',
+                                    isbn_13: '9875439654416',
+                                    author_id: author.id) }
+
+      it 'gets HTTP status 201' do
+        expect(response.status).to eq 201
+      end
+
+      it 'receives the newly created resource' do
+        expect(json_body['data']['title']).to eq(agile_rails.title)
+      end
+
+      it 'adds a record to the database' do
+        expect(Book.count).to eq 1
+      end
+
+      it 'gets the new resource location in the Location header' do
+        expect(response.headers['Location']).to eq("http://www.example.com/api/books/#{Book.first.id}")
+      end
+    end
+
+    context 'with invalid parameters' do
+      let(:params) { attributes_for(:agile_rails,
+                                    isbn_10: '1235548790',
+                                    isbn_13: '9875439654416',
+                                    title: '')}
+
+      it 'gets HTTP status 422' do
+        expect(response.status).to eq 422
+      end
+
+      it 'receives an error details' do
+        error = {'title'=>["can't be blank"], 'author'=>["can't be blank"] }
+        expect(json_body['error']['invalid_params']).to eq(error)
+      end
+
+      it 'does not add a record to database' do
+        expect(Book.count).to eq 0
+      end
+    end
+  end
+
 end
