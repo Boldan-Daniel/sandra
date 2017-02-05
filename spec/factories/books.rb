@@ -29,6 +29,6 @@ FactoryGirl.define do
     description 'Develop next-generation online shops using Ruby on Rails'
     released_on '2016-11-25'
     publisher
-    association :author, factory: :jarkko_laine
+    association :author, factory: :sam_ruby
   end
 end
