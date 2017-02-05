@@ -302,4 +302,26 @@ RSpec.describe 'Books', type: :request do
       end
     end
   end
+
+  describe 'DELETE /api/books/:id' do
+    context 'with existing resource' do
+      before { delete "/api/books/#{agile_rails.id}" }
+
+      it 'receives HTTP status 204' do
+        expect(response.status).to eq 204
+      end
+
+      it 'delete record from database' do
+        expect(Book.count).to eq 0
+      end
+    end
+
+    context 'with nonexistent resource' do
+      before { delete '/api/books/32783278' }
+
+      it 'gets HTTP status 404' do
+        expect(response.status).to eq 404
+      end
+    end
+  end
 end

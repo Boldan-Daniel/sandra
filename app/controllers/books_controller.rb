@@ -23,6 +23,12 @@ class BooksController < ApplicationController
       unprocessable_entity! book
     end
   end
+
+  def destroy
+    book.destroy
+    render status: :no_content
+  end
+
   private
 
   def book
