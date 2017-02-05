@@ -66,12 +66,12 @@ RSpec.describe 'Authors', type: :request do
 
     describe 'embed picking' do
       context 'with valid "embed" parameter' do
-        let(:agile_rails) { create :agile_rails, author_id: sam_ruby.id }
+        let!(:agile_rails) { create :agile_rails, author_id: sam_ruby.id }
 
         before { get '/api/authors?embed=books' }
 
         it 'gets the authors with their books embedded' do
-          expect(json_body['data'].first['id']).to eq agile_rails.id
+          expect(json_body['data'].first['books'].first['title']).to eq(agile_rails.title)
         end
       end
 
