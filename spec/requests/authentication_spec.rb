@@ -14,11 +14,11 @@ RSpec.describe 'Authentication', type: :request do
 
     context 'with valid authentication scheme' do
       let(:headers) do
-        { 'HTTP_AUTHORIZATION' => "Sandra-Token api_key=#{key}" }
+        { 'HTTP_AUTHORIZATION' => "Sandra-Token api_key=#{api_key.id}:#{api_key.key}" }
       end
 
       context 'with invalid api key' do
-        let(:key) { 'fake' }
+        let(:api_key) { OpenStruct.new(id: 1, key: 'fake') }
 
         it 'gets HTTP status 401 Unauthorized' do
           expect(response.status).to eq 401
@@ -26,7 +26,7 @@ RSpec.describe 'Authentication', type: :request do
       end
 
       context 'with disabled api key' do
-        let(:key) { ApiKey.create.tap { |key| key.disable }.key }
+        let(:api_key) { ApiKey.create.tap { |key| key.disable } }
 
         it 'gets HTTP status 401 Unauthorized' do
           expect(response.status).to eq 401
@@ -34,7 +34,7 @@ RSpec.describe 'Authentication', type: :request do
       end
 
       context 'with valid api key' do
-        let(:key) { ApiKey.create.key }
+        let(:api_key) { ApiKey.create }
 
         it 'gets HTTP status 200' do
           expect(response.status).to eq 200
