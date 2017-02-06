@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Search', type: :request do
+
+  before do
+    allow_any_instance_of(SearchController).to(
+        receive(:validate_auth_scheme).and_return(true))
+    allow_any_instance_of(SearchController).to(
+        receive(:authenticate_client).and_return(true))
+  end
+  
   let(:agile_rails) { create :agile_rails }
   let(:practical_ruby) { create :practical_ruby }
   let(:ecommerce_rails) { create :ecommerce_rails }

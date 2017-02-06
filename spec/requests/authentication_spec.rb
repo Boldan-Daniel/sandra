@@ -11,5 +11,35 @@ RSpec.describe 'Authentication', type: :request do
         expect(response.status).to eq 401
       end
     end
+
+    context 'with valid authentication scheme' do
+      let(:headers) do
+        { 'HTTP_AUTHORIZATION' => "Sandra-Token api_key=#{key}" }
+      end
+
+      context 'with invalid api key' do
+        let(:key) { 'fake' }
+
+        it 'gets HTTP status 401 Unauthorized' do
+          expect(response.status).to eq 401
+        end
+      end
+
+      context 'with disabled api key' do
+        let(:key) { ApiKey.create.tap { |key| key.disable }.key }
+
+        it 'gets HTTP status 401 Unauthorized' do
+          expect(response.status).to eq 401
+        end
+      end
+
+      context 'with valid api key' do
+        let(:key) { ApiKey.create.key }
+
+        it 'gets HTTP status 200' do
+          expect(response.status).to eq 200
+        end
+      end
+    end
   end
 end
