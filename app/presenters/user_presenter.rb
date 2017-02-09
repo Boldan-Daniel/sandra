@@ -7,5 +7,5 @@ class UserPresenter < BasePresenter
   filter_by *FIELDS
   build_with *[FIELDS.push([:confirmation_token, :reset_password_token,
                             :confirmation_redirect_url,
-                            :reset_password_redirect_ur]).flatten]
+                            :reset_password_redirect_url])].flatten
 end
