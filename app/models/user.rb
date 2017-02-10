@@ -14,6 +14,10 @@ class User < ApplicationRecord
 
   enum role: [:user, :admin]
 
+  def confirm
+    update_columns({ confirmation_token: nil, confirmed_at: Time.now })
+  end
+
   private
 
   def generate_confirmation_token
