@@ -39,6 +39,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:data).permit(:email, :given_name, :family_name, :role,
-                                 :password, :confirmation_redirect_link)
+                                 :password, :confirmation_redirect_url)
   end
 end
