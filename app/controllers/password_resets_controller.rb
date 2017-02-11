@@ -3,6 +3,7 @@ class PasswordResetsController < ApplicationController
   skip_before_action :authenticate_client, only: :show
 
   def show
+    redirect_to reset.redirect_url
   end
 
   def create
@@ -20,7 +21,11 @@ class PasswordResetsController < ApplicationController
   private
 
   def reset
-    @reset ||= PasswordReset.new(reset_params)
+    @reset ||= if params[:reset_token]
+                 PasswordReset.new(reset_password_token: params[:reset_token])
+               else
+                 PasswordReset.new(reset_params)
+               end
   end
 
   def reset_params
