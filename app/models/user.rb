@@ -18,6 +18,13 @@ class User < ApplicationRecord
     update_columns({ confirmation_token: nil, confirmed_at: Time.now })
   end
 
+  def init_password_reset(redirect_url)
+    assign_attributes({
+        reset_password_token: SecureRandom.hex,
+        reset_password_redirect_url: redirect_url })
+    save
+  end
+
   private
 
   def generate_confirmation_token
