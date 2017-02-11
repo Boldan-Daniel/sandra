@@ -8,7 +8,7 @@ module Authentication
     before_action :authenticate_client
   end
 
-  private
+  protected
 
   def validate_auth_scheme
     unless authorization_request.match(/^#{AUTH_SCHEME}/)

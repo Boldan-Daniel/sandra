@@ -52,4 +52,44 @@ RSpec.describe 'Access Tokens', type: :request do
       end
     end
   end
+
+  describe 'DELETE /api/access_tokens' do
+    context 'with valid API token' do
+      let(:api_key) { ApiKey.create }
+      let(:api_key_str) { "#{api_key.id}:#{api_key.key}" }
+
+      before { delete '/api/access_tokens', headers: headers }
+
+      context 'with valid access tokens' do
+        let(:access_token) { create(:access_token, api_key: api_key, user: daniel) }
+        let(:token) { access_token.generate_token }
+        let(:token_str) { "#{daniel.id}:#{token}"}
+
+        let(:headers) { { 'HTTP_AUTHORIZATION' => "Sandra-Token api_key=#{api_key_str} access_token=#{token_str}" } }
+
+        it 'gets HTTP status 204 No Content' do
+          expect(response.status).to eq 204
+        end
+
+        it 'destroy the access token' do
+          expect(daniel.reload.access_tokens.size).to eq 0
+        end
+      end
+
+      context 'with invalid access tokens' do
+        let(:headers) { { 'HTTP_AUTHORIZATION' => "Sandra-Token api_key=#{api_key_str} access_token=1:fake" } }
+
+        it 'gets HTTP status 401 Forbidden' do
+          expect(response.status).to eq 401
+        end
+      end
+    end
+
+    context 'with invalid API token' do
+      it 'gets HTTP status 401 Forbidden' do
+        delete '/api/access_tokens', params: {}
+        expect(response.status).to eq 401
+      end
+    end
+  end
 end
