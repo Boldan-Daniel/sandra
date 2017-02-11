@@ -5,4 +5,10 @@ class UserMailer < ApplicationMailer
     @user.update_column(:confirmation_sent_at, Time.now)
     mail to: @user.email, subject: 'Confirm your Account!'
   end
+
+  def reset_password(user)
+    @user = user
+    @user.update_column(:reset_password_sent_at, Time.now)
+    mail to: @user.email, subject: 'Reset your password'
+  end
 end
