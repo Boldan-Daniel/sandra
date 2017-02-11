@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  skip_before_action :authenticate_user
+
   def index
     @text = params[:text]
     scope = PgSearch.multisearch(@text).includes(:searchable)

@@ -1,4 +1,6 @@
 class PublishersController < ApplicationController
+  skip_before_action :authenticate_user, except: [:create, :update, :destroy]
+
   def index
     publishers = orchestrate_query(Publisher.all)
     render serialize(publishers)

@@ -1,5 +1,5 @@
 class AccessTokensController < ApplicationController
-  before_action :authenticate_user, only: :destroy
+  skip_before_action :authenticate_user, except: :destroy
 
   def create
     user = User.find_by!(email: login_params[:email])

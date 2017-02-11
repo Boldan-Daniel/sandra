@@ -1,13 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Authors', type: :request do
-
-  before do
-    allow_any_instance_of(AuthorsController).to(
-        receive(:validate_auth_scheme).and_return(true))
-    allow_any_instance_of(AuthorsController).to(
-        receive(:authenticate_client).and_return(true))
-  end
+  include_context 'Skip Auth'
 
   let(:sam_ruby) { create :sam_ruby}
   let(:jarkko_laine) { create :jarkko_laine }

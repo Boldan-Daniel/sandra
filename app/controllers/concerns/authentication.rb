@@ -6,6 +6,7 @@ module Authentication
   included do
     before_action :validate_auth_scheme
     before_action :authenticate_client
+    before_action :authenticate_user
   end
 
   protected

@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  skip_before_action :authenticate_user, except: [:create, :update, :destroy]
+
   def index
     books = orchestrate_query(Book.all)
     render serialize(books)

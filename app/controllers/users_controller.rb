@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user, except: [:index, :show, :update, :destroy]
+
   def index
     users = orchestrate_query(User.all)
     render serialize(users)
