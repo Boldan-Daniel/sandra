@@ -29,4 +29,5 @@ gem 'carrierwave', '~> 0.11.2'                  # Upload files in your Ruby appl
 gem 'carrierwave-base64', '~> 2.3', '>= 2.3.4'  # Upload files to your API from mobile devises
 gem 'kaminari', '~> 0.17.0'                     # Scope & Engine based paginator for Rails
 gem 'pg_search', '~> 2.0', '>= 2.0.1'           # Take advantage of PostgreSQL's full text search
-gem 'bcrypt', '~> 3.1', '>= 3.1.11'             # secure hash algorithm for hashing passwords
+gem 'bcrypt', '~> 3.1', '>= 3.1.11'             # Secure hash algorithm for hashing passwords
+gem 'pundit', '~> 1.1'                          # Object oriented authorization
