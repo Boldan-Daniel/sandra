@@ -9,7 +9,7 @@ class CreateAccessTokens < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :access_tokens, [:token_digest, :user_id, :api_key_id], unique: true
+    add_index :access_tokens, [:user_id, :api_key_id], unique: true
   end
 
 end
