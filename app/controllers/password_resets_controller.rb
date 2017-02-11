@@ -3,7 +3,8 @@ class PasswordResetsController < ApplicationController
   skip_before_action :authenticate_client, only: :show
 
   def show
-    redirect_to reset.redirect_url
+    new_reset = PasswordReset.new({ reset_password_token: params[:reset_token] })
+    redirect_to new_reset.redirect_url
   end
 
   def create
@@ -16,19 +17,22 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
+    reset.reset_password_token = params[:reset_token]
+
+    if reset.update
+      render status: :no_content, location: reset.user
+    else
+      unprocessable_entity!(reset)
+    end
   end
 
   private
 
   def reset
-    @reset ||= if params[:reset_token]
-                 PasswordReset.new(reset_password_token: params[:reset_token])
-               else
-                 PasswordReset.new(reset_params)
-               end
+    @reset ||= PasswordReset.new(reset_params)
   end
 
   def reset_params
-    params.require(:data).permit(:email, :reset_password_redirect_url)
+    params.require(:data).permit(:email, :reset_password_redirect_url, :password)
   end
 end

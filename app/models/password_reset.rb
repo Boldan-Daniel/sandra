@@ -1,10 +1,12 @@
 class PasswordReset
   include ActiveModel::Model
 
-  attr_accessor :email, :reset_password_redirect_url, :reset_password_token
+  attr_accessor :email, :reset_password_redirect_url, :password,
+                :reset_password_token, :updating
 
-  validates :email, presence: true
-  validates :reset_password_redirect_url, presence: true
+  validates :email, presence: true, unless: :updating
+  validates :reset_password_redirect_url, presence: true, unless: :updating
+  validates :password, presence: true, if: :updating
 
   def create
     user && valid? && user.init_password_reset(reset_password_redirect_url)
@@ -12,6 +14,11 @@ class PasswordReset
 
   def redirect_url
     build_redirect_url
+  end
+
+  def update
+    self.updating = true
+    user && valid? && user.complete_password_reset(password)
   end
 
   def user

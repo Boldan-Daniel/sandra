@@ -95,4 +95,49 @@ RSpec.describe 'PasswordResets', type: :request do
       end
     end
   end
+
+  describe 'PATCH /api/password_resets/:reset_token' do
+    before do
+      allow_any_instance_of(PasswordResetsController).to(
+          receive(:validate_auth_scheme).and_return(true))
+      allow_any_instance_of(PasswordResetsController).to(
+          receive(:authenticate_client).and_return(true))
+    end
+
+    context 'with existing user (valid token)' do
+      let(:daniel) { create(:user, :reset_password) }
+
+      before { patch "/api/password_resets/#{daniel.reset_password_token}", params: params}
+
+      context 'with valid parameters' do
+        let(:params) { { data: { password: 'new_password' } } }
+
+        it 'returns HTTP status 204' do
+          expect(response.status).to eq 204
+        end
+
+        it 'updates the password' do
+          expect(daniel.reload.authenticate('new_password')).to_not be_falsey
+        end
+      end
+
+      context 'with invalid params' do
+        let(:params) { { data: { password: '' } } }
+
+        it 'returns HTTP status 422' do
+          expect(response.status).to eq 422
+        end
+      end
+    end
+
+    context 'with nonexistent user' do
+      let(:params) { { data: { password: 'new_password' } } }
+
+      before { patch '/api/password_resets/fake_token', params: params }
+
+      it 'returns HTTP status 404' do
+        expect(response.status).to eq 404
+      end
+    end
+  end
 end
