@@ -16,11 +16,12 @@ class ApplicationController < ActionController::API
     }
   end
 
-  def serialize(data)
+  def serialize(data, options = {})
     {
         json: Sandra::Serializer.new(data: data,
                                      params: params,
-                                     actions: [:fields, :embeds]).to_json
+                                     actions: [:fields, :embeds],
+                                     options: options).to_json
     }
   end
 
