@@ -2,6 +2,7 @@ class PasswordResetsController < ApplicationController
   skip_before_action :validate_auth_scheme, only: :show
   skip_before_action :authenticate_client, only: :show
   skip_before_action :authenticate_user
+  before_action :skip_authorization
 
   def show
     new_reset = PasswordReset.new({ reset_password_token: params[:reset_token] })

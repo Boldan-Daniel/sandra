@@ -23,7 +23,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       it 'receives all 2 users' do
-        expect(json_body['data'].size).to eq 2
+        expect(json_body['data'].size).to eq 3
       end
     end
 
@@ -146,7 +146,7 @@ RSpec.describe 'Users', type: :request do
         it 'sorts the users by "id desc"' do
           get '/api/users?sort=id&dir=desc'
           expect(json_body['data'].first['id']).to eq john.id
-          expect(json_body['data'].last['id']).to eq daniel.id
+          expect(json_body['data'].last['id']).to eq admin_user.id
         end
       end
 
@@ -232,11 +232,11 @@ RSpec.describe 'Users', type: :request do
       end
 
       it 'adds a record to the database' do
-        expect(User.count).to eq 1
+        expect(User.count).to eq 2
       end
 
       it 'gets the new resource location in the Location header' do
-        expect(response.headers['Location']).to eq("http://www.example.com/api/users/#{User.first.id}")
+        expect(response.headers['Location']).to eq("http://www.example.com/api/users/#{User.last.id}")
       end
 
       it 'delivers confirmation email mailer' do
@@ -257,7 +257,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       it 'does not add a record to database' do
-        expect(User.count).to eq 0
+        expect(User.count).to eq 1
       end
     end
   end
@@ -277,7 +277,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       it 'updates the record in the database' do
-        expect(User.first.given_name).to eq 'Vasile'
+        expect(User.first.given_name).to eq 'Super'
       end
     end
 
@@ -294,7 +294,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       it 'does not update the record in database' do
-        expect(User.first.email).to eq('daniel@sandra.app')
+        expect(User.first.email).to eq('admin@sandra.app')
       end
     end
   end
@@ -308,7 +308,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       it 'delete record from database' do
-        expect(User.count).to eq 0
+        expect(User.count).to eq 1
       end
     end
 

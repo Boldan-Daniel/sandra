@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user, except: [:index, :show, :update, :destroy]
+  before_action :authorize_actions
 
   def index
     users = orchestrate_query(User.all)

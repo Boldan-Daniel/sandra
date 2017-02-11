@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   skip_before_action :authenticate_user, except: [:create, :update, :destroy]
+  before_action :authorize_actions
 
   def index
     books = orchestrate_query(Book.all)

@@ -1,5 +1,6 @@
 class AuthorsController < ApplicationController
   skip_before_action :authenticate_user, except: [:create, :update, :destroy]
+  before_action :authorize_actions
 
   def index
     authors = orchestrate_query(Author.all)

@@ -1,5 +1,6 @@
 class AccessTokensController < ApplicationController
   skip_before_action :authenticate_user, except: :destroy
+  before_action :skip_authorization, except: :destroy
 
   def create
     user = User.find_by!(email: login_params[:email])
@@ -22,6 +23,7 @@ class AccessTokensController < ApplicationController
   end
 
   def destroy
+    authorize(access_token)
     access_token.destroy
     render status: :no_content
   end
