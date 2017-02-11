@@ -2,7 +2,7 @@ class ApiKey < ApplicationRecord
   before_validation :generate_key, on: :create
 
   validates :key, presence: true
-  validates :active, presence: true
+  validates :active, :inclusion => {:in => [true, false]}
 
   scope :activated, -> { where(active: true) }
 

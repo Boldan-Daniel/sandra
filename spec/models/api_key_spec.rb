@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe ApiKey, type: :model do
   let(:key) { ApiKey.create }
 
+  it 'has a valid factory' do
+    expect(build(:api_key)).to be_valid
+  end
+
   it 'is valid on creation' do
     expect(key).to be_valid
   end
