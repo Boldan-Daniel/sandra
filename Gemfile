@@ -31,3 +31,4 @@ gem 'kaminari', '~> 0.17.0'                     # Scope & Engine based paginator
 gem 'pg_search', '~> 2.0', '>= 2.0.1'           # Take advantage of PostgreSQL's full text search
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'             # Secure hash algorithm for hashing passwords
 gem 'pundit', '~> 1.1'                          # Object oriented authorization
+gem 'money-rails', '~> 1.8'                     # Integration of RubyMoney
