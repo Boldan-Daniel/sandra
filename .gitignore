@@ -25,6 +25,7 @@
 *.rbc
 capybara-*.html
 .rspec
+/config/env.rb
 /public/system
 /public/uploads
 /images
