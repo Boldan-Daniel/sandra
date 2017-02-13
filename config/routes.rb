@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       delete '/', action: :destroy, on: :collection
     end
 
+    resources :purchases, only: [:index, :show, :create]
+
     get '/search/:text', to: 'search#index'
   end
 
