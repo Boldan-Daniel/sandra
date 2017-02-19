@@ -26,5 +26,6 @@ module Sandra
   class Application < Rails::Application
     config.api_only = true
     config.filter_parameters += [:cover]
+    config.middleware.use Rack::Deflater
   end
 end
