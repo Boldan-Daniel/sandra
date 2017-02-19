@@ -39,7 +39,13 @@ module Authentication
   end
 
   def api_key
-    @api_key ||= authenticator.api_key
+    @api_key ||= -> do
+      key = "api_keys/#{authenticator.credentials['api_key']}"
+
+      Rails.cache.fetch(key, expires_in: 24.hours) do
+        authenticator.api_key
+      end
+    end.call
   end
 
   def access_token
