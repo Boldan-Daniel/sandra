@@ -34,3 +34,4 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.11'             # Secure hash algorithm for hash
 gem 'pundit', '~> 1.1'                          # Object oriented authorization
 gem 'money-rails', '~> 1.8'                     # Integration of RubyMoney
 gem 'stripe', '~> 1.58'                         # accept payments online
+gem 'oj', '~> 2.18', '>= 2.18.1'                # fastest JSON parser and object serializer.
