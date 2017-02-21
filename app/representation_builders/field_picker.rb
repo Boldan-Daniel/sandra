@@ -8,6 +8,10 @@ class FieldPicker
     @presenter
   end
 
+  def fields
+    @fields ||= validate_fields
+  end
+
   private
 
   def build_fields
@@ -15,10 +19,6 @@ class FieldPicker
       target = @presenter.respond_to?(field) ? @presenter : @presenter.object
       @presenter.data[field] = target.send(field) if target
     end
-  end
-
-  def fields
-    @fields ||= validate_fields
   end
 
   def validate_fields

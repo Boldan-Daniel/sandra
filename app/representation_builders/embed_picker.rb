@@ -9,6 +9,10 @@ class EmbedPicker
     @presenter
   end
 
+  def embeds
+    @embeds ||= validate_embeds
+  end
+
   private
 
   def build_embed(valid_embed)
@@ -32,10 +36,6 @@ class EmbedPicker
     associations.each_with_object({}) do |r, hash|
       hash["#{r.name}"] = r
     end
-  end
-
-  def embeds
-    @embeds ||= validate_embeds
   end
 
   def validate_embeds
